@@ -1,4 +1,4 @@
-# Cinema
+# Cinema ACS
 automatic control system for cinema on WPF (.NET 6.0)
 
 **Pet project, where you can find implementation examples of the following things:**
