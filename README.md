@@ -9,4 +9,5 @@ automatic control system for cinema on WPF (.NET 6.0)
 * ICommand pattern
 * Application Config (loads on start and fill the menu)
 * C# Refelctions (in auto mapper, factory, entity manager etc)
+
 _...and other_
