@@ -1,0 +1,47 @@
+﻿<Window x:Class="Cinema.Views.ChangeSessionView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinema.Views" xmlns:ViewModels="clr-namespace:Cinema.ViewModels"
+        mc:Ignorable="d"
+        Title="ChangeSessionView" Height="325" Width="300">
+    <Window.DataContext>
+        <ViewModels:ChangeSessionViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <DockPanel LastChildFill="False">
+            <StackPanel Margin="10" DockPanel.Dock="Top">
+                <Label Content="Стоимость:"/>
+                <TextBox Text="{Binding Model.Cost}"/>
+                <Label Content="Кинозал:"/>
+                <ComboBox ItemsSource="{Binding AllHalls}" SelectedItem="{Binding SelectedHall, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Cinema.Title}"/>
+                                <TextBlock Margin="3 0 3 0" Text="№"/>
+                                <TextBlock Text="{Binding Number}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Фильм:"/>
+                <ComboBox ItemsSource="{Binding AllMovies}" SelectedItem="{Binding SelectedMovie, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Title}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Дата:"/>
+                <DatePicker SelectedDate="{Binding Model.StartDate}"/>
+
+
+            </StackPanel>
+            <Button DockPanel.Dock="Bottom" Margin="10" Content="Сохранить" Command="{Binding EventCommand}"/>
+        </DockPanel>
+    </Grid>
+</Window>

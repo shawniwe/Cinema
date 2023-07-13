@@ -1,0 +1,88 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinema.Views"
+        xmlns:ViewModels="clr-namespace:Cinema.ViewModels" x:Class="Cinema.Views.ChangeMovieView"
+        mc:Ignorable="d"
+        Title="ChangeMovieView" Height="600" Width="1000">
+    <Window.DataContext>
+        <ViewModels:ChangeMovieViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel LastChildFill="False">
+            <StackPanel Margin="10" DockPanel.Dock="Top">
+                <Label Content="Постер:"/>
+                <Image Height="200" Source="{Binding DisplayPhoto}"></Image>
+                <Button Style="{DynamicResource MaterialDesignFlatButton}" Command="{Binding LoadPhotoCommand}">Загрузить фото</Button>
+                <Label Content="Название:"/>
+                <TextBox Text="{Binding Model.Title}"/>
+                <Label Content="Страна выпуска:"/>
+                <ComboBox ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Жанр:"/>
+                <ComboBox ItemsSource="{Binding Genres}" SelectedItem="{Binding SelectedGenre}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Title}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Время (в минутах):"/>
+                <TextBox Text="{Binding Model.Minutes}"/>
+            </StackPanel>
+            <Button DockPanel.Dock="Bottom" Margin="10" Content="Сохранить" Command="{Binding EventCommand}"/>
+        </DockPanel>
+        <StackPanel Grid.Column="1">
+            <ScrollViewer Height="175" Margin="0 0 0 20">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Content="Добавить актера" Command="{Binding AddActorCommand}"/>
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Content="Удалить актера" Command="{Binding DeleteActorCommand}"/>
+                    </StackPanel>
+                    <DataGrid IsReadOnly="True" ItemsSource="{Binding MovieActors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedActor}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Актер" Binding="{Binding Actor.Name}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer Height="175" Margin="0 0 0 20">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Content="Добавить режиссера" Command="{Binding AddProducerCommand}"/>
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Content="Удалить режиссера" Command="{Binding DeleteProducerCommand}"/>
+                    </StackPanel>
+                    <DataGrid IsReadOnly="True" ItemsSource="{Binding MovieProducers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedProducer}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Режиссер" Binding="{Binding Producer.Name}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer Height="175" Margin="0 0 0 20">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Content="Добавить оператора" Command="{Binding AddOperatorCommand}"/>
+                        <Button Style="{DynamicResource MaterialDesignFlatButton}" Content="Удалить оператора" Command="{Binding DeleteOperatorCommand}"/>
+                    </StackPanel>
+                    <DataGrid IsReadOnly="True" ItemsSource="{Binding MovieOperators, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOperator}" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Оператор" Binding="{Binding Operator.Name}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Window>

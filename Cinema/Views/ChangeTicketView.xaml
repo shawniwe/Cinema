@@ -1,0 +1,52 @@
+﻿<Window x:Class="Cinema.Views.ChangeTicketView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cinema.Views" xmlns:ViewModels="clr-namespace:Cinema.ViewModels"
+        mc:Ignorable="d"
+        Title="ChangeTicketView" Height="225" Width="350">
+    <Window.DataContext>
+        <ViewModels:ChangeTicketViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <DockPanel LastChildFill="False">
+            <StackPanel Margin="10" DockPanel.Dock="Top">
+                <Label Content="Сессия:"/>
+                <ComboBox ItemsSource="{Binding AllSessions}" SelectedItem="{Binding SelectedSession, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="3 0 0 0" Text="{Binding Hall.Cinema.Title}"/>
+                                <TextBlock>,</TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Margin="3 0 0 0">"</TextBlock>
+                                    <TextBlock Text="{Binding Movie.Title}"/>
+                                    <TextBlock Margin="0 0 3 0">",</TextBlock>
+                                </StackPanel>
+                                <TextBlock Margin="0 0 3 0" Text="Зал №"/>
+                                <TextBlock Text="{Binding Hall.Id}"/>
+                                <TextBlock Margin="3 0 3 0" Text="Время"/>
+                                <TextBlock Text="{Binding StartDate}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Место:"/>
+                <ComboBox ItemsSource="{Binding AllPlaces}" SelectedItem="{Binding SelectedPlace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Ряд №"/>
+                                <TextBlock Margin="0 0 3 0" Text="{Binding Row.Number}"/>
+                                <TextBlock Margin="3 0 0 0"  Text="Место №"/>
+                                <TextBlock Text="{Binding Number}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <Button DockPanel.Dock="Bottom" Margin="10" Content="Сохранить" Command="{Binding EventCommand}"/>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,68 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Cinema.Views"
+      xmlns:ViewModels="clr-namespace:Cinema.ViewModels" x:Class="Cinema.Views.MovieView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MovieView"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Page.DataContext>
+        <ViewModels:MovieViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <DockPanel>
+            <DockPanel Margin="10" DockPanel.Dock="Top" LastChildFill="False">
+                <Button x:Name="AddButon" Margin="0 0 10 0" Padding="10 0" Content="Добавить" Command="{Binding AddCommand}"></Button>
+                <Button x:Name="DeleteButton" Margin="0 0 10 0" Padding="10 0" Content="Удалить" Command="{Binding DeleteCommand}"></Button>
+                <Button x:Name="EditButton" Margin="0 0 10 0" Padding="10 0" Content="Изменить" Command="{Binding UpdateCommand}"></Button>
+            </DockPanel>
+            <ListView ItemsSource="{Binding Movies}" SelectedItem="{Binding SelectedItem}" Style="{DynamicResource MaterialDesignCardsListBox}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Card>
+                            <DockPanel>
+                                <StackPanel Margin="10" DockPanel.Dock="Left">
+                                    <Image Height="200" Source="{Binding DisplayPhoto}"/>
+                                </StackPanel>
+                                <StackPanel Margin="10 0 0 0" DockPanel.Dock="Right">
+                                    <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}" Text="{Binding Title}"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="0 0 5 0" Text="Страна:"/>
+                                        <TextBlock Text="{Binding Country.Title}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="0 0 5 0" Text="Жанр:"/>
+                                        <TextBlock Text="{Binding Genre.Title}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Margin="0 0 5 0" Text="Длительность:"/>
+                                        <TextBlock Text="{Binding Minutes}"/>
+                                        <TextBlock Text=" мин."/>
+                                    </StackPanel>
+                                    <StackPanel Margin="0 5 0 0">
+                                        <TextBlock Text="Актеры(-ы):"/>
+                                        <TextBlock Text="{Binding ActorsStr}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="0 5 0 0">
+                                        <TextBlock Text="Режиссер(-ы):"/>
+                                        <TextBlock Text="{Binding ProducersStr}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="0 5 0 0">
+                                        <TextBlock Text="Оператор(-ы):"/>
+                                        <TextBlock Text="{Binding OperatorsStr}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DockPanel>
+                        </materialDesign:Card>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </DockPanel>   
+    </Grid>
+
+</Page>
